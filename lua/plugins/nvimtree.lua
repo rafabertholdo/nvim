@@ -1,11 +1,10 @@
 return {
 	"nvim-tree/nvim-tree.lua",
-	version = "*",
-	lazy = false,
+	cmd = { "NvimTreeToggle", "NvimTreeFocus" },
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
-	config = function()
-		require("nvim-tree").setup({})
+	opts = function()
+		return require("bertholdo.configs.nvimtree")
 	end,
 }

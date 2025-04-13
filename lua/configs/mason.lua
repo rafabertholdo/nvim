@@ -1,17 +1,21 @@
-return {
-  PATH = "skip",
+require("mason").setup({
+	PATH = "skip",
 
-  ui = {
-    icons = {
-      package_pending = " ",
-      package_installed = " ",
-      package_uninstalled = " ",
-    },
-  },
+	ui = {
+		icons = {
+			package_pending = " ",
+			package_installed = " ",
+			package_uninstalled = " ",
+		},
+	},
 
-  max_concurrent_installers = 10,
-  ensure_installed = {
-    "codelldb",
-    "swiftlint",
-  },
-}
+	max_concurrent_installers = 10,
+	ensure_installed = {
+		"codelldb",
+		"swiftlint",
+	},
+})
+
+require("mason-lspconfig").setup({
+	ensure_installed = {},
+})

@@ -32,7 +32,7 @@ External Requirements:
   - If you want to write Golang, you will need `go`
   - etc.
 
-### Install Bertholdo
+### Neovim config path
 
 Neovim's configurations are located under the following paths, depending on your OS:
 

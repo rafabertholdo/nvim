@@ -11,11 +11,13 @@ require("mason").setup({
 
 	max_concurrent_installers = 10,
 	ensure_installed = {
+        "stylua",
+        "prettier",
 		"codelldb",
 		"swiftlint",
 	},
 })
 
-require("mason-lspconfig").setup({
-	ensure_installed = {},
-})
+--require("mason-lspconfig").setup({
+--	ensure_installed = {},
+--})

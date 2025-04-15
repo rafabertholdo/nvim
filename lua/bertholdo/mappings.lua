@@ -1,15 +1,15 @@
-require("nvchad.mappings")
-
--- add yours here
-
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
+vim.g.mapleader = " "
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<C-g>", ":NvimTreeToggle<CR>", { desc = "Toggle NvTree" })
 map("i", "jk", "<ESC>")
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+-- Comment
+map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
+map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Explorer" })
 
@@ -33,9 +33,9 @@ vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
 vim.keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
 
 vim.keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" }) -- open new tab
-vim.keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" }) -- close current tab
-vim.keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
-vim.keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
+vim.keymap.set("n", "<leader>x", "<cmd>tabclose<CR>", { desc = "Close current tab" }) -- close current tab
+vim.keymap.set("n", "<Tab>", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
+vim.keymap.set("n", "<S-Tab>", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 vim.keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 
 -- Debugger
@@ -45,60 +45,30 @@ vim.keymap.set("n", "<F6>", "<cmd>DapStepOver<CR>", { desc = "Step Over" })
 vim.keymap.set("n", "<F7>", "<cmd>DapStepInto<CR>", { desc = "Step Into" })
 vim.keymap.set("n", "<F8>", "<cmd>DapStepOut<CR>", { desc = "Step out" })
 
--- Move
--- vim.keymap.set("v", "<C-d>", "<C-d>zz", { noremap = true })
+-- telescope
+map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
+map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "telescope find files" })
+map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
+map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
+map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
+map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope find oldfiles" })
+map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "telescope find in current buffer" })
+map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
+map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
+map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
+
 -- vim.keymap.set("v", "<C-u>", "<C-u>zz", { noremap = true })
--- vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
--- vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- vim.keymap.set("n", "J", "mzJ`z")
 
-local dap_helper = require("dap-helper")
-local dap = require("dap")
-vim.keymap.set("n", "<F5>", function()
-	-- Check if debuggger is already running
-	if #dap.status() == 0 and dap_helper.get_build_cmd() then
-		local ret = os.execute(dap_helper.get_build_cmd() .. " > /dev/null 2>&1")
-		if ret ~= 0 then
-			vim.notify("Build failed", vim.log.levels.ERROR)
-			return
-		end
-	end
-	dap.continue()
-end)
-
--- vim.keymap.set(
--- 	"n",
--- 	"<leader>dt",
--- 	"<cmd>lua require('persistent-breakpoints.api').toggle_breakpoint()<cr>",
--- 	{ desc = "Toggle breakpoint", noremap = true, silent = true }
--- )
--- vim.keymap.set(
--- 	"n",
--- 	"<leader>dz",
--- 	"<cmd>lua require('persistent-breakpoints.api').set_conditional_breakpoint()<cr>",
--- 	{ desc = "Set conditional Breakpoint", noremap = true, silent = true }
--- )
--- vim.keymap.set(
--- 	"n",
--- 	"<leader>dc",
--- 	"<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>",
--- 	{ desc = "clear all breakpoints", noremap = true, silent = true }
--- )
--- vim.keymap.set(
--- 	"n",
--- 	"<leader>dl",
--- 	"<cmd>lua require('persistent-breakpoints.api').set_log_point()<cr>",
--- 	{ desc = "Set log point", noremap = true, silent = true }
--- )
---
---
 -- primeagen
 
-vim.keymap.set("n", "J", "mzJ`z")
+--vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+--vim.keymap.set("n", "n", "nzzzv")
+--vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "=ap", "ma=ap'a")
 vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>")
 

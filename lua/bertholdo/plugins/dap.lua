@@ -34,6 +34,22 @@ return {
 	},
 	{
 		"mfussenegger/nvim-dap",
+		config = function()
+			require("bertholdo.configs.dap")
+			local dap_helper = require("dap-helper")
+			local dap = require("dap")
+			vim.keymap.set("n", "<F5>", function()
+				-- Check if debuggger is already running
+				if #dap.status() == 0 and dap_helper.get_build_cmd() then
+					local ret = os.execute(dap_helper.get_build_cmd() .. " > /dev/null 2>&1")
+					if ret ~= 0 then
+						vim.notify("Build failed", vim.log.levels.ERROR)
+						return
+					end
+				end
+				dap.continue()
+			end)
+		end,
 	},
 	{
 		"daic0r/dap-helper.nvim",

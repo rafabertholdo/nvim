@@ -10,6 +10,7 @@ A starting point for Swift developers to Neovim
 
 ### Install Neovim
 
+You can build from source: [Neovim Build from source](https://github.com/neovim/neovim/blob/master/BUILD.md)
 ['stable'](https://github.com/neovim/neovim/releases/tag/stable) and latest
 
 ['nightly'](https://github.com/neovim/neovim/releases/tag/nightly) of Neovim.
@@ -30,13 +31,7 @@ External Requirements:
   - If you want to write Golang, you will need `go`
   - etc.
 
-> [!NOTE]
-> See [Install Recipes](#Install-Recipes) for additional Windows and Linux specific notes
-> and quick install snippets
-
-### Install Kickstart
-
-> [!NOTE] > [Backup](#FAQ) your previous configuration (if any exists)
+### Install Bertholdo
 
 Neovim's configurations are located under the following paths, depending on your OS:
 
@@ -45,3 +40,44 @@ Neovim's configurations are located under the following paths, depending on your
 | Linux, MacOS         | `$XDG_CONFIG_HOME/nvim`, `~/.config/nvim` |
 | Windows (cmd)        | `%localappdata%\nvim\`                    |
 | Windows (powershell) | `$env:LOCALAPPDATA\nvim\`                 |
+
+#### Clone bertholdo.nvim
+
+> [!NOTE]
+> If following the recommended step above (i.e., forking the repo), replace
+> `nvim-lua` with `<your_github_username>` in the commands below
+
+<details><summary> Linux and Mac </summary>
+
+```sh
+git clone https://github.com/rafabertholdo/nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+```
+
+</details>
+
+<details><summary> Windows </summary>
+
+If you're using `cmd.exe`:
+
+```
+git clone https://github.com/rafabertholdo/nvim.git "%localappdata%\nvim"
+```
+
+If you're using `powershell.exe`
+
+```
+git clone https://github.com/rafabertholdo/nvim.git "${env:LOCALAPPDATA}\nvim"
+```
+
+</details>
+
+### Post Installation
+
+Start Neovim
+
+```sh
+nvim
+```
+
+That's it! Lazy will install all the plugins you have. Use `:Lazy` to view
+the current plugin status. Hit `q` to close the window.

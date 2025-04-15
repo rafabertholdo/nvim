@@ -1,6 +1,3 @@
---require("bertholdo.configs.dap")
--- add yours here!
-
 local opt = vim.opt
 
 opt.relativenumber = true

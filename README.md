@@ -94,9 +94,8 @@ MasonInstall stylua
 
 ### Linux / MacOS (unix)
 
-````sh
+```sh
 rm -rf ~/.config/nvim
 rm -rf ~/.local/state/nvim
 rm -rf ~/.local/share/nvim
 ```
-````

@@ -1,4 +1,4 @@
-# Nvim do Bertholdo
+# Bertholdo's Neovim RC
 
 ## Introduction
 

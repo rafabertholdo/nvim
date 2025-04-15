@@ -11,6 +11,7 @@ A starting point for Swift developers to Neovim
 ### Install Neovim
 
 You can build from source: [Neovim Build from source](https://github.com/neovim/neovim/blob/master/BUILD.md)
+
 ['stable'](https://github.com/neovim/neovim/releases/tag/stable) and latest
 
 ['nightly'](https://github.com/neovim/neovim/releases/tag/nightly) of Neovim.

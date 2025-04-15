@@ -50,8 +50,16 @@ Neovim's configurations are located under the following paths, depending on your
 
 ##### Linux and Mac
 
+Http:
+
 ```sh
 git clone https://github.com/rafabertholdo/nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+```
+
+ssh:
+
+```sh
+git clone git@github.com:rafabertholdo/nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
 ##### Windows

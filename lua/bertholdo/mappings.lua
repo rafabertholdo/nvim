@@ -37,7 +37,7 @@ vim.keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current bu
 vim.keymap.set("n", "<leader>h", ":sp<bar>term<cr><c-w>J:resize10<cr>i", { desc = "Open terminal horizontally" })
 
 -- Debugger
-vim.keymap.set("n", "<C-b>", "<cmd>DapToggleBreakpoint <CR>", { desc = "Toggle breakpoint" }) --  move current buffer to new tab
+vim.keymap.set("n", "<A-\\>", "<cmd>DapToggleBreakpoint <CR>", { desc = "Toggle breakpoint" }) --  move current buffer to new tab
 --vim.keymap.set("n", "<C-A-y>", "<cmd>DapContinue <CR>", { desc = "Start or continue the debugger" }) --  move current buffer to new tab
 vim.keymap.set("n", "<F6>", "<cmd>DapStepOver<CR>", { desc = "Step Over" })
 vim.keymap.set("n", "<F7>", "<cmd>DapStepInto<CR>", { desc = "Step Into" })
@@ -107,7 +107,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- vim.keymap.set("n", "<leader>ef", 'oif err != nil {<CR>}<Esc>Olog.Fatalf("error: %s\\n", err.Error())<Esc>jj')
 
--- vim.keymap.set("n", "<leader>el", 'oif err != nil {<CR>}<Esc>O.logger.Error("error", "error", err)<Esc>F.;i')
+vim.keymap.set("n", "<leader>el", 'oif err != nil {<CR>}<Esc>O.logger.Error("error", "error", err)<Esc>F.;i')
 
 vim.keymap.set("n", "<leader>ca", function()
 	require("cellular-automaton").start_animation("make_it_rain")

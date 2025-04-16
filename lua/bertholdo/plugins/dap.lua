@@ -9,7 +9,47 @@ return {
 		config = function()
 			local dap = require("dap")
 			local dapui = require("dapui")
-			dapui.setup()
+			dapui.setup({
+				layouts = {
+					{
+						elements = {
+							{
+								id = "stacks",
+								size = 0.10,
+							},
+							{
+								id = "breakpoints",
+								size = 0.10,
+							},
+							{
+								id = "watches",
+								size = 0.10,
+							},
+							{
+								id = "scopes",
+								size = 0.70,
+							},
+						},
+						position = "left",
+						size = 40,
+					},
+					{
+						elements = {
+							{
+								id = "console",
+								size = 0.3,
+							},
+							{
+								id = "repl",
+								size = 0.7,
+							},
+						},
+						position = "bottom",
+						size = 10,
+					},
+				},
+			})
+
 			dap.listeners.after.event_initialized["dapui_config"] = function()
 				dapui.open()
 			end
@@ -36,32 +76,6 @@ return {
 		"mfussenegger/nvim-dap",
 		config = function()
 			require("bertholdo.configs.dap")
-			local dap_helper = require("dap-helper")
-			local dap = require("dap")
-			vim.keymap.set("n", "<C-b>", function()
-				-- Check if debuggger is already running
-				if #dap.status() == 0 and dap_helper.get_build_cmd() then
-					local ret = os.execute(dap_helper.get_build_cmd() .. " > /dev/null 2>&1")
-					if ret ~= 0 then
-						vim.notify("Build failed", vim.log.levels.ERROR)
-						return
-					end
-					vim.notify("Build succeded", vim.log.levels.INFO)
-				else
-					vim.notify("No build command, run: DapHelperSetBuildCommand", vim.log.levels.ERROR)
-				end
-			end)
-			vim.keymap.set("n", "<F5>", function()
-				-- Check if debuggger is already running
-				if #dap.status() == 0 and dap_helper.get_build_cmd() then
-					local ret = os.execute(dap_helper.get_build_cmd() .. " > /dev/null 2>&1")
-					if ret ~= 0 then
-						vim.notify("Build failed", vim.log.levels.ERROR)
-						return
-					end
-				end
-				dap.continue()
-			end)
 		end,
 	},
 	{
@@ -71,13 +85,4 @@ return {
 			require("dap-helper").setup()
 		end,
 	},
-	-- {
-	-- 	"Weissle/persistent-breakpoints.nvim",
-	-- 	config = function()
-	-- 		require("persistent-breakpoints").setup({
-	-- 			always_reload = true,
-	-- 			load_breakpoints_event = { "BufReadPost" },
-	-- 		})
-	-- 	end,
-	-- },
 }

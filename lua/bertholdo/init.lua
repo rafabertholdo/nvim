@@ -19,6 +19,31 @@ end
 
 autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
+-- autocmd("FileType", {
+-- 	pattern = "swift",
+-- 	callback = function()
+-- 		vim.api.nvim_buf_set_keymap(0, "n", "<C-b>", function()
+-- 			local ret = os.execute("swift build > /dev/null 2>&1")
+-- 			if ret ~= 0 then
+-- 				vim.notify("Build failed", vim.log.levels.ERROR)
+-- 				return
+-- 			end
+-- 			vim.notify("Build succeded", vim.log.levels.INFO)
+-- 		end)
+--
+-- 		vim.api.nvim_buf_set_keymap(0, "n", "<F5>", function()
+-- 			local ret = os.execute("swift build > /dev/null 2>&1")
+-- 			if ret ~= 0 then
+-- 				vim.notify("Build failed", vim.log.levels.ERROR)
+-- 				return
+-- 			end
+-- 			vim.notify("Build succeded", vim.log.levels.INFO)
+-- 			local dap = require("dap")
+-- 			dap.continue()
+-- 		end)
+-- 	end,
+-- })
+
 vim.filetype.add({
 	extension = {
 		templ = "templ",

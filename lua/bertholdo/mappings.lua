@@ -58,6 +58,28 @@ map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidd
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+-- build and run
+-- vim.keymap.set("n", "<C-b>", "<cmd>!swift build<CR>", { desc = "Step Into" })
+
+vim.keymap.set("n", "<C-b>", function()
+	local ret = os.execute("swift build > /dev/null 2>&1")
+	if ret ~= 0 then
+		vim.notify("Build failed", vim.log.levels.ERROR)
+		return
+	end
+	vim.notify("Build succeded", vim.log.levels.INFO)
+end)
+
+vim.keymap.set("n", "<F5>", function()
+	local ret = os.execute("swift build > /dev/null 2>&1")
+	if ret ~= 0 then
+		vim.notify("Build failed", vim.log.levels.ERROR)
+		return
+	end
+	vim.notify("Build succeded", vim.log.levels.INFO)
+	local dap = require("dap")
+	dap.continue()
+end)
 -- primeagen
 
 --vim.keymap.set("n", "J", "mzJ`z")

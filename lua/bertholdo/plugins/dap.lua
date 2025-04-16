@@ -47,6 +47,8 @@ return {
 						return
 					end
 					vim.notify("Build succeded", vim.log.levels.INFO)
+				else
+					vim.notify("No build command, run: DapHelperSetBuildCommand", vim.log.levels.ERROR)
 				end
 			end)
 			vim.keymap.set("n", "<F5>", function()

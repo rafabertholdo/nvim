@@ -20,7 +20,7 @@ local options = {
 			command = "swift-format",
 			-- A list of strings, or a function that returns a list of strings
 			-- Return a single string instead of a list to run the command in a shell
-			args = { "format", "$FILENAME", "--in-place"},
+			args = { "format", "$FILENAME", "--in-place" },
 			-- If the formatter supports range formatting, create the range arguments here
 			range_args = function(self, ctx)
 				return { "--offsets", ctx.range.start[1] .. ":" .. ctx.range["end"][1] }

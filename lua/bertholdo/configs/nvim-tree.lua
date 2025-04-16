@@ -1,5 +1,5 @@
 return {
-	filters = { dotfiles = true },
+	filters = { dotfiles = false },
 	disable_netrw = true,
 	hijack_cursor = true,
 	sync_root_with_cwd = true,

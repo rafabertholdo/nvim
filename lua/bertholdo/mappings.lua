@@ -18,6 +18,11 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
+vim.keymap.set("n", "<leader>y", '"+y', opts)
+
+-- Stay in ident mode
+vim.keymap.set("v", "<", "<gv", opts)
+vim.keymap.set("v", ">", ">gv", opts)
 
 -- increment/decrement numbers
 vim.keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number" }) -- increment

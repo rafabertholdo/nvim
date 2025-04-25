@@ -35,7 +35,7 @@ opt.updatetime = 50
 -- opt.colorcolumn = "80"
 
 -- nvim-tree open at startup
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 opt.signcolumn = "yes"

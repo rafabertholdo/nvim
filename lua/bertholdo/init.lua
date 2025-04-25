@@ -17,7 +17,7 @@ local function open_nvim_tree()
 	require("nvim-tree.api").tree.open()
 end
 
-autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+-- autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
 -- autocmd("FileType", {
 -- 	pattern = "swift",

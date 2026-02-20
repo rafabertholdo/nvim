@@ -12,12 +12,12 @@ return {
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
 		"j-hui/fidget.nvim",
-		"VonHeikemen/lsp-zero.nvim",
 	},
 
 	config = function()
 		local cmp = require("cmp")
 		local cmp_lsp = require("cmp_nvim_lsp")
+		local lspconfig = require("lspconfig")
 		local capabilities = vim.tbl_deep_extend(
 			"force",
 			{},
@@ -34,14 +34,13 @@ return {
 				"marksman",
 			},
 			handlers = {
-				function(server_name) -- default handler (optional)
+				function(server_name)
 					require("lspconfig")[server_name].setup({
 						capabilities = capabilities,
 					})
 				end,
 
-				zls = function()
-					local lspconfig = require("lspconfig")
+				["zls"] = function()
 					lspconfig.zls.setup({
 						root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
 						settings = {
@@ -55,16 +54,14 @@ return {
 					vim.g.zig_fmt_parse_errors = 0
 					vim.g.zig_fmt_autosave = 0
 				end,
+
 				["lua_ls"] = function()
-					local lspconfig = require("lspconfig")
 					lspconfig.lua_ls.setup({
 						capabilities = capabilities,
 						settings = {
 							Lua = {
 								format = {
 									enable = true,
-									-- Put format options here
-									-- NOTE: the value should be STRING!!
 									defaultConfig = {
 										indent_style = "space",
 										indent_size = "2",
@@ -77,38 +74,51 @@ return {
 			},
 		})
 
+		-- Configure SourceKit LSP for Swift
+		lspconfig.sourcekit.setup({
+			capabilities = capabilities,
+			cmd = {
+				"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
+			},
+			root_dir = lspconfig.util.root_pattern("Package.swift", ".git"),
+			filetypes = { "swift", "objective-c", "objective-cpp" },
+		})
+
+		-- Configure Marksman for Markdown
+		lspconfig.marksman.setup({
+			capabilities = capabilities,
+		})
+
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-		local cmp_action = require("lsp-zero").cmp_action()
 		cmp.setup({
 			snippet = {
 				expand = function(args)
-					require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+					require("luasnip").lsp_expand(args.body)
 				end,
 			},
 			mapping = cmp.mapping.preset.insert({
-				["<C-Space>"] = cmp_action.toggle_completion(),
+				["<C-Space>"] = cmp.mapping.complete(),
 				["<S-Tab>"] = cmp.mapping.select_prev_item(cmp_select),
 				["<Tab>"] = cmp.mapping.select_next_item(cmp_select),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
-				["<S-CR>"] = cmp.mapping.complete(),
+				["<C-y>"] = cmp.mapping.confirm({ select = true }),
 			}),
 			sources = cmp.config.sources({
-				{ name = "copilot", group_index = 2 },
 				{ name = "nvim_lsp" },
-				{ name = "luasnip" }, -- For luasnip users.
+				{ name = "luasnip" },
+				{ name = "lazydev", group_index = 0 },
 			}, {
 				{ name = "buffer" },
 			}),
 		})
 
 		vim.diagnostic.config({
-			-- update_in_insert = true,
 			float = {
 				focusable = false,
 				style = "minimal",
 				border = "rounded",
-				source = "always",
+				source = true,
 				header = "",
 				prefix = "",
 			},

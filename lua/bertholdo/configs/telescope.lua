@@ -3,7 +3,8 @@ return {
 		prompt_prefix = "   ",
 		selection_caret = " ",
 		entry_prefix = " ",
-		sorting_strategy = "ascending",
+		path_display = { "smart" },
+    sorting_strategy = "ascending",
 		layout_config = {
 			horizontal = {
 				prompt_position = "top",

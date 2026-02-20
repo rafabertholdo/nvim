@@ -1,5 +1,5 @@
 return {
-	ensure_installed = { "swift", "bash", "json", "lua", "luadoc", "printf", "vim", "vimdoc" },
+	ensure_installed = { "yaml", "swift", "bash", "json", "lua", "luadoc", "printf", "vim", "vimdoc" },
 
 	highlight = {
 		enable = true,

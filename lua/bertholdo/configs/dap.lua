@@ -18,12 +18,13 @@ dap.adapters.debugserver = {
 	--port = 13000, -- ?? Use the port printed out or specified with `--port`
 	port = "13000",
 	executable = {
-		command = "/home/rafabertholdo/.local/share/nvim/mason/bin/codelldb",
+		command = "/home/bi001933/.local/share/nvim/mason/bin/codelldb",
 		args = {
 			"--port",
 			"13000",
 			"--liblldb",
-			"/home/rafabertholdo/.local/share/swiftly/toolchains/6.1.0/usr/lib/liblldb.so.17.0",
+			-- "/home/rafabertholdo/.local/share/swiftly/toolchains/6.1.0/usr/lib/liblldb.so.17.0",
+			"/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/Resources/liblldbCoreDevicePlugin.dylib",
 		},
 	},
 }

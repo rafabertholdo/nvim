@@ -3,46 +3,14 @@ require("bertholdo.options")
 require("bertholdo.lazy")
 
 local augroup = vim.api.nvim_create_augroup
-local BertholdoGroup = augroup("bertholdo", {})
-
 local autocmd = vim.api.nvim_create_autocmd
+
+local BertholdoGroup = augroup("bertholdo", {})
 local yank_group = augroup("HighlightYank", {})
 
 function R(name)
 	require("plenary.reload").reload_module(name)
 end
-
-local function open_nvim_tree()
-	-- open the tree
-	require("nvim-tree.api").tree.open()
-end
-
--- autocmd({ "VimEnter" }, { callback = open_nvim_tree })
-
--- autocmd("FileType", {
--- 	pattern = "swift",
--- 	callback = function()
--- 		vim.api.nvim_buf_set_keymap(0, "n", "<C-b>", function()
--- 			local ret = os.execute("swift build > /dev/null 2>&1")
--- 			if ret ~= 0 then
--- 				vim.notify("Build failed", vim.log.levels.ERROR)
--- 				return
--- 			end
--- 			vim.notify("Build succeded", vim.log.levels.INFO)
--- 		end)
---
--- 		vim.api.nvim_buf_set_keymap(0, "n", "<F5>", function()
--- 			local ret = os.execute("swift build > /dev/null 2>&1")
--- 			if ret ~= 0 then
--- 				vim.notify("Build failed", vim.log.levels.ERROR)
--- 				return
--- 			end
--- 			vim.notify("Build succeded", vim.log.levels.INFO)
--- 			local dap = require("dap")
--- 			dap.continue()
--- 		end)
--- 	end,
--- })
 
 vim.filetype.add({
 	extension = {
@@ -60,23 +28,6 @@ autocmd("TextYankPost", {
 		})
 	end,
 })
-
-autocmd({ "BufWritePre" }, {
-	group = BertholdoGroup,
-	pattern = "*",
-	command = [[%s/\s\+$//e]],
-})
-
--- autocmd("BufEnter", {
--- 	group = BertholdoGroup,
--- 	callback = function()
--- 		if vim.bo.filetype == "zig" then
--- 			vim.cmd.colorscheme("tokyonight-night")
--- 		else
--- 			vim.cmd.colorscheme("rose-pine-moon")
--- 		end
--- 	end,
--- })
 
 autocmd("LspAttach", {
 	group = BertholdoGroup,
@@ -118,6 +69,3 @@ autocmd("LspAttach", {
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
-
-vim.lsp.enable("sourcekit")
-vim.lsp.enable("marksman")

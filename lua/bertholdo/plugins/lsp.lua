@@ -17,7 +17,6 @@ return {
 	config = function()
 		local cmp = require("cmp")
 		local cmp_lsp = require("cmp_nvim_lsp")
-		local lspconfig = require("lspconfig")
 		local capabilities = vim.tbl_deep_extend(
 			"force",
 			{},
@@ -33,61 +32,53 @@ return {
 				"bashls",
 				"marksman",
 			},
-			handlers = {
-				function(server_name)
-					require("lspconfig")[server_name].setup({
-						capabilities = capabilities,
-					})
-				end,
+		})
 
-				["zls"] = function()
-					lspconfig.zls.setup({
-						root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
-						settings = {
-							zls = {
-								enable_inlay_hints = true,
-								enable_snippets = true,
-								warn_style = true,
-							},
-						},
-					})
-					vim.g.zig_fmt_parse_errors = 0
-					vim.g.zig_fmt_autosave = 0
-				end,
-
-				["lua_ls"] = function()
-					lspconfig.lua_ls.setup({
-						capabilities = capabilities,
-						settings = {
-							Lua = {
-								format = {
-									enable = true,
-									defaultConfig = {
-										indent_style = "space",
-										indent_size = "2",
-									},
-								},
-							},
-						},
-					})
-				end,
+		vim.lsp.config("zls", {
+			root_dir = function()
+				return vim.fs.root(0, { ".git", "build.zig", "zls.json" })
+			end,
+			settings = {
+				zls = {
+					enable_inlay_hints = true,
+					enable_snippets = true,
+					warn_style = true,
+				},
 			},
 		})
 
-		-- Configure SourceKit LSP for Swift
-		lspconfig.sourcekit.setup({
+		vim.lsp.config("lua_ls", {
+			capabilities = capabilities,
+			settings = {
+				Lua = {
+					format = {
+						enable = true,
+						defaultConfig = {
+							indent_style = "space",
+							indent_size = "2",
+						},
+					},
+				},
+			},
+		})
+
+		vim.lsp.config("sourcekit", {
 			capabilities = capabilities,
 			cmd = {
 				"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
 			},
-			root_dir = lspconfig.util.root_pattern("Package.swift", ".git"),
+			root_dir = function()
+				return vim.fs.root(0, { "Package.swift", ".git" })
+			end,
 			filetypes = { "swift", "objective-c", "objective-cpp" },
 		})
 
-		-- Configure Marksman for Markdown
-		lspconfig.marksman.setup({
+		vim.lsp.config("marksman", {
 			capabilities = capabilities,
 		})
+
+		vim.g.zig_fmt_parse_errors = 0
+		vim.g.zig_fmt_autosave = 0
 
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 

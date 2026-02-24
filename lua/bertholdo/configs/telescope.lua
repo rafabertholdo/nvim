@@ -16,6 +16,13 @@ return {
 		mappings = {
 			n = { ["q"] = require("telescope.actions").close },
 		},
+		pickers = {
+			live_grep = {
+				additional_args = function()
+					return { "--case-insensitive" }
+				end,
+			},
+		},
 	},
 
 	extensions_list = { "themes", "terms" },

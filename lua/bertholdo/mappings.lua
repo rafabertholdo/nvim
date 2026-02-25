@@ -62,10 +62,29 @@ vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
 
 -- Debugger
-vim.keymap.set("n", "<A-\\>", "<cmd>DapToggleBreakpoint <CR>", { desc = "Toggle breakpoint" })
+vim.keymap.set("n", "<leader>Bb", "<cmd>DapToggleBreakpoint <CR>", { desc = "Toggle breakpoint" })
+vim.keymap.set("n", "<F5>", "<cmd>DapContinue<CR>", { desc = "Start/Continue debugging" })
 vim.keymap.set("n", "<F6>", "<cmd>DapStepOver<CR>", { desc = "Step Over" })
 vim.keymap.set("n", "<F7>", "<cmd>DapStepInto<CR>", { desc = "Step Into" })
 vim.keymap.set("n", "<F8>", "<cmd>DapStepOut<CR>", { desc = "Step out" })
+vim.keymap.set("n", "<F9>", "<cmd>DapTerminate<CR>", { desc = "Terminate debugging" })
+
+-- DAP UI and REPL
+vim.keymap.set("n", "<leader>Br", function()
+	require("dapui").toggle({ reset = true })
+end, { desc = "Toggle DAP UI" })
+vim.keymap.set("n", "<leader>Be", function()
+	require("dapui").eval()
+end, { desc = "Evaluate expression" })
+vim.keymap.set("v", "<leader>Be", function()
+	require("dapui").eval()
+end, { desc = "Evaluate expression" })
+vim.keymap.set("n", "<leader>Bc", function()
+	require("dapui").float_element("console", { enter = true })
+end, { desc = "Open debug console" })
+vim.keymap.set("n", "<leader>Bp", function()
+	require("dapui").float_element("repl", { enter = true })
+end, { desc = "Open REPL (LLDB console)" })
 
 -- Telescope
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })

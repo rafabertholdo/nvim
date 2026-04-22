@@ -29,3 +29,12 @@ opt.scrolloff = 8
 opt.isfname:append("@-@")
 
 opt.updatetime = 50
+
+-- Auto-reload files when changed externally
+opt.autoread = true
+
+-- Setup autocommands to trigger checktime on various events
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+    pattern = "*",
+    command = "if mode() !~ '\\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif",
+})

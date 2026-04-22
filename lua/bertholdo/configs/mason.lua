@@ -1,23 +1,35 @@
 require("mason").setup({
-	PATH = "skip",
-
+	PATH = "prepend",
 	ui = {
 		icons = {
-			package_pending = " ",
-			package_installed = " ",
-			package_uninstalled = " ",
+			package_pending = " ",
+			package_installed = " ",
+			package_uninstalled = " ",
 		},
 	},
-
 	max_concurrent_installers = 10,
-	ensure_installed = {
-		"stylua",
-		"prettier",
-		"codelldb",
-		"swiftlint",
-	},
 })
 
---require("mason-lspconfig").setup({
---	ensure_installed = {},
---})
+local registry = require("mason-registry")
+
+local packages = {
+	"lua-language-server",
+	"bash-language-server",
+	"marksman",
+	"kotlin-lsp",
+	"jdtls",
+	"java-debug-adapter",
+	"ktlint",
+	"xmlformatter",
+	"stylua",
+	"prettier",
+	"codelldb",
+	"swiftlint",
+}
+
+for _, package_name in ipairs(packages) do
+	local ok, pkg = pcall(registry.get_package, package_name)
+	if ok and not pkg:is_installed() then
+		pkg:install()
+	end
+end

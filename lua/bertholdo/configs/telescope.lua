@@ -1,4 +1,6 @@
-return {
+local telescope = require("telescope")
+
+telescope.setup({
 	defaults = {
 		prompt_prefix = "   ",
 		selection_caret = " ",
@@ -16,7 +18,6 @@ return {
 		mappings = {
 			n = { ["q"] = require("telescope.actions").close },
 		},
-		-- Search hidden files by default
 		vimgrep_arguments = {
 			"rg",
 			"--color=never",
@@ -25,14 +26,14 @@ return {
 			"--line-number",
 			"--column",
 			"--smart-case",
-			"--hidden",  -- Include hidden files
-			"--glob=!.git/",  -- But exclude .git directory
+			"--hidden",
+			"--glob=!.git/",
 		},
 	},
 
 	pickers = {
 		find_files = {
-			hidden = true,  -- Show hidden files in find_files
+			hidden = true,
 			find_command = { "rg", "--files", "--hidden", "--glob", "!.git/" },
 		},
 		live_grep = {
@@ -42,6 +43,7 @@ return {
 		},
 	},
 
-	extensions_list = { "themes", "terms" },
 	extensions = {},
-}
+})
+
+pcall(telescope.load_extension, "fzf")

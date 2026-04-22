@@ -1,4 +1,4 @@
-return {
+require("nvim-tree").setup({
 	filters = { dotfiles = false },
 	disable_netrw = true,
 	hijack_cursor = true,
@@ -19,14 +19,14 @@ return {
 			glyphs = {
 				default = "󰈚",
 				folder = {
-					default = "",
-					empty = "",
-					empty_open = "",
-					open = "",
-					symlink = "",
+					default = "",
+					empty = "",
+					empty_open = "",
+					open = "",
+					symlink = "",
 				},
-				git = { unmerged = "" },
+				git = { unmerged = "" },
 			},
 		},
 	},
-}
+})
